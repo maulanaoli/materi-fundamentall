@@ -1,0 +1,135 @@
+<script>
+  var arrItem = ["Jeruk", "Kiwi", "Apel"];
+  var arrPrice = [20000, 25000, 30000];
+  var PriceChart = [];
+  var arrChart = [];
+  var repeat = true;
+  var repeatlogin = true;
+  while (repeat) {
+    //====================MENU LOGIN===================
+    do {
+      var login = prompt("MENU LOGIN \n1. Admin \n2. User \n3. Exit");
+      if (login == 1 || login == 2 || login == 3) {
+        repeatlogin = false;
+      } else {
+        alert("Invalid Input");
+        repeatlogin = true;
+      }
+    } while (repeatlogin);
+
+    var repeatadmin;
+    //===================MENU ADMIN===================
+    if (login == 1) {
+      do {
+        menuadmin = prompt(
+          "MENU ADMIN \n1. Show Product, \n2. Insert Product \n3 delete Product \n4. Back to menu"
+        );
+        if (menuadmin <= 4) {
+          repeatadmin = false;
+        } else {
+          alert("invalid input");
+          repeatadmin = true;
+        }
+        //=============SHOW PRODUCT======================
+        if (menuadmin == 1) {
+          var showProduct = "";
+          for (i = 0; i < arrItem.length; i++) {
+            showProduct +=
+              i + 1 + ". " + arrItem[i] + " Rp." + arrPrice[i] + "\n";
+          }
+          alert(showProduct);
+          repeatadmin = true;
+          //=================Insert Product====================
+        } else if (menuadmin == 2) {
+          var repeatInsert;
+          do {
+            var insertItem = prompt("Masukan item yang ingin di tambahkan");
+            if (arrItem.includes(insertItem)) {
+              alert("Item telah Terdaftar dalam Keranjang");
+              repeatInsert = true;
+            } else {
+              insertPrice = prompt("Berapa harga untuk barang ini ? :");
+              arrItem.push(insertItem);
+              arrPrice.push(insertPrice);
+              repeatInsert = false;
+              repeatadmin = true;
+            }
+          } while (repeatInsert);
+        } else if (menuadmin == 3) {
+          do {
+            var deleteItem = prompt("Masukan item yang ingin di hapus");
+            if (arrItem.includes(deleteItem)) {
+              arrItem.splice(arrItem.indexOf(deleteItem), 1);
+              arrPrice.splice(arrItem.indexOf(deleteItem), 1);
+              alert("item telah terhapus");
+              repeatDelete = false;
+              repeatadmin = true;
+            } else {
+              alert("Memang tidak ada item " + deleteItem + " Pada Keranjang");
+              repeatadmin = false;
+              repeatDelete = true;
+            }
+          } while (repeatDelete);
+        } else if (menuadmin == 4) {
+          repeat = true;
+        }
+      } while (repeatadmin);
+      //=================MENU USER==============
+    } else if (login == 2) {
+      do {
+        menuuser = prompt(
+          "MENU USER \n1. Go Shopping \n2. Show Cart \n3. check out \n4.Back to Main Menu"
+        );
+        if (menuuser <= 4) {
+          repeatuser = false;
+        } else {
+          repeatuser = true;
+        }
+
+        if (menuuser == 1) {
+          var repeatGoShop;
+          var showProduct = "";
+          for (i = 0; i < arrItem.length; i++) {
+            showProduct +=
+              i + 1 + ". " + arrItem[i] + " Rp." + arrPrice[i] + "\n";
+          }
+          do {
+            var goShopping = prompt("Silahkan Pilih \n" + showProduct);
+
+            var JumlahItem = prompt("Isikan Jumlah");
+            if (JumlahItem > 0) {
+              arrChart.push(
+                arrItem[goShopping - 1] + " = " + JumlahItem + "buah"
+              );
+              PriceChart.push(arrPrice[goShopping - 1] * JumlahItem);
+
+              repeatuser = true;
+             } else {
+              alert("invalid jumlah input");
+            }
+          } while (repeatGoShop);
+        } else if (menuuser == 2) {
+          var insertProduct = "";
+
+          for (j = 0; j < arrChart.length; j++) {
+            insertProduct +=
+              j + 1 + ". " + arrChart[j] + " Rp." + PriceChart[j] + "\n";
+          }
+
+          alert(insertProduct);
+        } else if (menuuser == 3) {
+          var insertProduct = "";
+          for (j = 0; j < arrChart.length; j++) {
+            insertProduct +=
+              j + 1 + ". " + arrChart[j] + " Rp." + PriceChart[j] + "\n";
+          }
+          alert(insertProduct);
+        }
+      } while (repeatuser);
+      //=================EXIT==================
+    } else {
+      alert("Terimakasih");
+      break;
+    }
+  }
+</script>

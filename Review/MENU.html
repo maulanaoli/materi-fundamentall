@@ -1,0 +1,80 @@
+<script>
+  // memu 1. segitiga siku 2. sama sisi 3.belanja .4exit
+  //segitiga siku = 1. siku atas 2. siku bawah
+  //masukan baris 1-10
+  //sama sisi = langsung masukan baris
+  //belanja = 1.ayam 2.sapi
+  //exit = break
+  var repeat = true;
+  while (repeat) {
+    // PROMPT MENU
+    var Menu = prompt(
+      'MENU PROGRAM \n 1.Segitiga siku" \n 2. Segitiga Sama Sisi \n 3. Belanja \n 4. Exit'
+    );
+    if (Menu == 1) {
+      do {
+        //PROMPT SIKU
+        var siku = parseIntprompt(
+          'MENU SEGITIGA SIKU" \n1. Siku Atas \n2. Siku Bawah'
+        );
+        if (siku == 1 || siku == 2) {
+          var repeatsiku = false;
+        } else {
+          alert('masukan "HANYA" angka 1 atau dua');
+          repeatsiku = true;
+        }
+      } while (repeatsiku);
+    } else if (Menu == 2) {
+      do {
+        //PROMPT SEGITIGA SAMA SISI
+        var samasisi = parseInt(
+          "SEGITIGA SAMA SISI \n Berapa baris segitiga? (1 - 10)"
+        );
+        if (samasisi <= 10 && samasisi >= 1) {
+          var repatss = false;
+        } else {
+          repatss = true;
+        }
+      } while (repatss);
+    } else if (Menu == 3) {
+      //PROMPT MENU BELANJA
+      do {
+        var shop = prompt("MENU BELANJA \n1.Ayam \n2.Sapi");
+        if (shop == 1 || shop == 2) {
+          var repeatShop = false;
+        } else {
+          alert("CUMA JUAL AYAM DAN SAPI!");
+          repeatShop = true;
+        }
+      } while (repeatShop);
+    } else if (Menu == 4) {
+      //PROMPT EXIT
+      tanya = confirm("apakah kamu yakin untuk keluar");
+      if ((tanya = true)) {
+        break;
+      }
+    } else {
+      alert("invalid input");
+    }
+    //PROGRAM SIKU ATAS
+    if (Menu == 1 && siku == 1) {
+      do {
+        var baris = parseIntprompt(
+          "SEGITIGA SIKU ATAS \n Berapa baris segitiga? (1 - 10)"
+        );
+        if (baris <= 10 && baris >= 1) {
+          var repatsikuAtas = false;
+        } else {
+          alert("siku salah");
+          repatsikuAtas = true;
+        }
+      } while (repatsikuAtas);
+      for (var i = 0; i < baris; i++) {
+        for (var j = 0; j < i; j++) {
+          alert(" *");
+        }
+        alert(" *");
+      }
+    }
+  }
+</script>

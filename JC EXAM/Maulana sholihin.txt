@@ -1,0 +1,23 @@
+bulan = (n, p, d, t) => {
+  bebek = n;
+  persen = p / 100;
+
+  for (var i = 1; i < 12; i++) {
+    bebek = bebek + bebek * persen + d;
+    if (bebek >= t) {
+      return "bebek akan mencapai " + t + " dalam " + i + " bulan";
+    }
+  }
+};
+console.log(bulan(1000, 5, 50, 1200));
+console.log(bulan(1500000, 2.5, 10000, 2000000));
+
+function odd() {
+  var arr = [[0]];
+  for (var i = 1; i < 5; i++) {
+    arr += [i];
+  }
+  return arr;
+}
+console.log(odd());
+//nmr 3 blm slsai srry :D

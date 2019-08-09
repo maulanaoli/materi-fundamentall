@@ -1,0 +1,124 @@
+<script>
+  function Program() {
+    segitigaSiku = prompt(
+      "SEGITIGA SIKU - SIKU \n1. Siku Atas \n2. Siku Bawah"
+    );
+  }
+  function SikuAtas() {
+    for (var i = 0; i < baris; i++) {
+      hasil += "*";
+
+      for (var j = 0; j < i; j++) {
+        hasil += "*";
+      }
+      hasil += "\n";
+    }
+    alert(hasil);
+  }
+  function SikuBawah() {
+    for (var i = 1; i <= baris; i++) {
+      hasil += " *";
+      for (var j = baris; j > i; j--) {
+        hasil += " *";
+      }
+      hasil += "\n";
+    }
+    alert(hasil);
+  }
+  function SegitigaSs() {
+    var inputBarisSamaKaki = prompt("Berapa Baris ? (1-10)");
+    var x = "";
+
+    for (let i = 0; i <= inputBarisSamaKaki - 1; i++) {
+      for (let k = 0; k <= inputBarisSamaKaki - i; k++) {
+        x += " ";
+      }
+      for (let j = 1; j <= i; j++) {
+        x += " * ";
+      }
+      x += " * " + "\n";
+    }
+
+    alert(x);
+  }
+  function Belanja() {
+    belanja = prompt(
+      "MENU BELANJA \n1. Ayam = 10.000/pcs \n2. Sapi = 25.000/pcs \n3. Salmon = 30.000/pcs"
+    );
+  }
+  function ayam() {
+    var Ayam = prompt("Berapa potong? (10.000/potong)");
+    var totalHarga;
+    totalHarga = 10000 * Ayam;
+    alert("Total harga adalah : Rp." + totalHarga);
+  }
+  function sapi() {
+    var Sapi = prompt("Berapa potong? (25.000/potong)");
+    var totalHarga;
+    totalHarga = 25000 * Sapi;
+    alert("Total harga adalah : Rp." + totalHarga);
+  }
+  function salmon() {
+    var Salmon = prompt("Berapa potong? (30.000/potong)");
+    var totalHarga;
+    totalHarga = 30000 * Salmon;
+    alert("Total harga adalah : Rp." + totalHarga);
+  }
+
+  function keluar() {
+    alert("Terimakasih");
+  }
+  do {
+    var hasil = "";
+    do {
+      var jenisProgram = prompt(
+        "MENU : \n1. Segitiga Siku - Siku\n2. Segitiga Sama kaki\n3. Belanja\n4. Exit"
+      );
+      if (
+        jenisProgram == 1 ||
+        jenisProgram == 2 ||
+        jenisProgram == 3 ||
+        jenisProgram == 4
+      ) {
+        var x = 1;
+      } else {
+        var x = 0;
+        alert("INPUT SALAH");
+      }
+    } while (x == 0);
+    if (jenisProgram == 1) {
+      do {
+        segitigaSiku = prompt(
+          "SEGITIGA SIKU - SIKU \n1. Siku Atas \n2. Siku Bawah"
+        );
+        if (segitigaSiku == 1 || segitigaSiku == 2) {
+          var x = 1;
+        } else {
+          var x = 0;
+          alert("MASUKAN HANYA ANGKA 1 ATAU 2");
+        }
+
+        if (segitigaSiku == 1) {
+          var baris = prompt("Pilih baris (1 - 10)");
+          if (baris >= 1 && baris <= 10) SikuAtas();
+        } else if (segitigaSiku == 2) {
+          var baris = prompt("Pilih baris (1 - 10)");
+          SikuBawah();
+        }
+      } while (x == 0);
+    } else if (jenisProgram == 2) {
+      SegitigaSs();
+    } else if (jenisProgram == 3) {
+      Belanja();
+
+      if (belanja == 1) {
+        ayam();
+      } else if (belanja == 2) {
+        sapi();
+      } else if (belanja == 3) {
+        salmon();
+      }
+    }
+  } while (confirm("Hitung lagi?"));
+  alert("terimakasih telah mampir");
+</script>

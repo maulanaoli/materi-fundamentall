@@ -1,0 +1,71 @@
+<script>
+  //1. user input jenis program ->
+
+  //a siku" membesar
+  //b siku" mengecil
+  //sama kaki
+  //belanja
+
+  //2. user input jumlah baris segitiga
+  //3. ulang?
+  //4. kalau tidakulang display message
+
+  var hasil = "";
+
+  var jenisProgram = prompt(
+    "MENU : \n1. Segitiga Siku - Siku\n2. Segitiga Sama kaki\n3. Belanja\n4. Exit"
+  );
+
+  if (jenisProgram == 1) {
+    var segitigaSiku = prompt(
+      "SEGITIGA SIKU - SIKU \n1. Siku Atas \n2. Siku Bawah"
+    );
+
+    if (segitigaSiku == 1) {
+      var baris = prompt("Pilih baris (1 - 10)");
+      for (var i = 0; i < baris; i++) {
+        hasil += "*";
+
+        for (var j = 0; j < i; j++) {
+          hasil += "*";
+        }
+        hasil += "\n";
+      }
+      alert(hasil);
+    } else if (segitigaSiku == 2) {
+      baris = prompt("Pilih baris (1 - 10)");
+      for (var i = 1; i <= 5; i++) {
+        hasil += " *";
+        for (var j = 5; j > i; j--) {
+          hasil += " *";
+        }
+        hasil += "\n";
+      }
+    }
+    alert(hasil);
+  } else if (jenisProgram == 2) {
+    alert("maaf saya blm bisa segitiga sama sisi");
+  } else if (jenisProgram == 3) {
+    belanja = prompt(
+      "MENU BELANJA \n1. Ayam = 10.000/pcs \n2. Sapi = 25.000/pcs \n3. Salmon = 30.000/pcs"
+    );
+    if (belanja == 1) {
+      var Ayam = prompt("Berapa potong? (10.000/potong)");
+      var totalHarga;
+      totalHarga = 10000 * Ayam;
+      alert("Total harga adalah : Rp." + totalHarga);
+    } else if (belanja == 2) {
+      var Sapi = prompt("Berapa potong? (25.000/potong)");
+      var totalHarga;
+      totalHarga = 25000 * Sapi;
+      alert("Total harga adalah : Rp." + totalHarga);
+    } else if (belanja == 3) {
+      var Salmon = prompt("Berapa potong? (30.000/potong)");
+      var totalHarga;
+      totalHarga = 30000 * Salmon;
+      alert("Total harga adalah : Rp." + totalHarga);
+    }
+  } else if (jenisProgram == 4) {
+    alert("Terimakasih");
+  }
+</script>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      th {
+        cursor: pointer;
+      }
+      th:hover {
+        background-color: lightblue;
+        color: black;
+        transition: 0.5s;
+      }
+      .thKu {
+        background-color: rgb(1, 2, 68);
+        color: white;
+        transition: 0.5s;
+      }
+    </style>
+    <form class="container border mt-3 p-3">
+      <div class="row">
+        <div class="col-6">
+          <label>Name</label>
+          <input type="text" id="nama" class="form-control" />
+        </div>
+        <div class="col-md-6">
+          <label>Gender</label>
+          <div class="form-control">
+            Pria
+            <input type="radio" value="P" name="gender" id="kelamin" /> Wanita
+            <input type="radio" value="W" name="gender" id="kelamin" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <label>Age</label>
+          <input class="form-control" id="umur" type="number" />
+        </div>
+
+        <div class="col-6">
+          <label>Job</label>
+          <input class="form-control" id="pekerjaan" type="text" />
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12">
+          <input
+            type="button"
+            value="ADD DATA"
+            onclick="addData()"
+            class="btn btn-block btn-secondary"
+          />
+        </div>
+      </div>
+    </form>
+
+    <div class="container mt-5 text-center">
+      <h3>Filter</h3>
+      <div class="row justify-content-center text-center">
+        <input
+          onkeyup="filterData()"
+          id="filter-name"
+          placeholder="Filter by name"
+          type="text"
+          class="form-control col-3 m-2"
+        />
+        <input
+          onkeyup="filterData()"
+          id="filter-age"
+          placeholder="Filter by age"
+          type="text"
+          class="form-control col-3 m-2"
+        />
+
+        <select name="test" id="filter-job" class="form-control col-3 m-2">
+          <option value="">filterJob</option>
+        </select>
+        <input
+          onkeyup="filterData()"
+          id="filter-gender"
+          placeholder="Filter by Gender"
+          type="text"
+          class="form-control col-2 m-2"
+        />
+      </div>
+    </div>
+
+    <div class="container mt-5 text-center">
+      <h3>Data</h3>
+      <table class="table-bordered table text-center mt-3">
+        <thead>
+          <tr>
+            <th class="thKu" onclick="sortByName()">Name</th>
+            <th class="thKu" onclick="sortByAge()">Age</th>
+            <th class="thKu" onclick="sortByJob()">Job</th>
+            <th class="thKu" onclick="sortByGender()">Gender</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <script>
+      class Person {
+        constructor(nama, umur, pekerjaan, kelamin) {
+          (this.nama = nama),
+            (this.umur = umur),
+            (this.pekerjaan = pekerjaan),
+            (this.gender = kelamin);
+        }
+      }
+      var data = [
+        new Person("siti", "23", "Coder", "W"),
+        new Person("wulan", "43", "Developer", "W"),
+        new Person("Budi", "13", "CEO", "p"),
+        new Person("Anton", "23", "Student", "p"),
+        new Person("Andre", "43", "Big boss", "p"),
+        new Person("Max", "53", "Cogan", "p")
+      ];
+      var nameDir = "asc";
+      function selectJob(arr) {
+        var hasilPekerjaan = [];
+        var include = document.getElementById("pekerjaan").value;
+        var hasil = "";
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i].pekerjaan.includes(include)) {
+            false;
+          } else {
+            hasilPekerjaan.push(include);
+          }
+        }
+        for (i = 0; i < arr.length; i++) {
+          hasil += ` <option value="1">${hasilPekerjaan[i]}</option>`;
+        }
+        document.getElementById("filter-job").innerHTML = hasil;
+      }
+
+      function showData(arr) {
+        var hasil = "";
+        for (var i = 0; i < arr.length; i++) {
+          hasil += `<tr>
+                        <td>${arr[i].nama}</td>
+                        <td>${arr[i].umur}</td>
+                        <td>${arr[i].pekerjaan}</td>
+                        <td>${arr[i].gender}</td>
+
+                        </tr>`;
+        }
+        document.getElementsByTagName("tbody")[0].innerHTML = hasil;
+      }
+      function addData() {
+        var inputNama = document.getElementById("nama").value;
+        var inputUmur = document.getElementById("umur").value;
+        var inputPekerjaan = document.getElementById("pekerjaan").value;
+        var inputGender = document.getElementById("kelamin").checked;
+        if (inputGender == true) {
+          inputGender = "P";
+        } else {
+          inputGender = "W";
+        }
+        var newData = new Person(
+          inputNama,
+          inputUmur,
+          inputPekerjaan,
+          inputGender
+        );
+        data[data.length] = newData;
+        showData(data);
+        selectJob(data);
+      }
+      selectJob(data);
+      showData(data);
+      function filterData() {
+        var filterName = document.getElementById("filter-name").value;
+        var filterAge = document.getElementById("filter-age").value;
+        var filterJob = document.getElementById("filter-job").value;
+        var filterGender = document.getElementById("filter-gender").value;
+        var tempData = [];
+        // alert(filterName)
+        for (var i = 0; i < data.length; i++) {
+          if (
+            data[i].nama.startsWith(filterName) &&
+            data[i].pekerjaan.startsWith(filterJob) &&
+            data[i].umur.startsWith(filterAge) &&
+            data[i].gender.startsWith(filterGender)
+          ) {
+            tempData.push(data[i]);
+          }
+        }
+        showData(tempData);
+      }
+      function sortByName() {
+        var tempData = data;
+        if (nameDir == "asc") {
+          for (let i = tempData.length - 1; i > 0; i--) {
+            for (let j = 0; j < i; j++) {
+              if (tempData[j].nama > tempData[j + 1].nama) {
+                const temp = tempData[j];
+                tempData[j] = tempData[j + 1];
+                tempData[j + 1] = temp;
+              }
+            }
+          }
+          nameDir = "desc";
+        } else {
+          for (let i = tempData.length - 1; i > 0; i--) {
+            for (let j = 0; j < i; j++) {
+              if (tempData[j].nama < tempData[j + 1].nama) {
+                const temp = tempData[j];
+                tempData[j] = tempData[j + 1];
+                tempData[j + 1] = temp;
+              }
+            }
+          }
+          nameDir = "asc";
+        }
+        showData(tempData);
+      }
+
+      function sortByAge() {
+        var tempData = data;
+        if (nameDir == "asc") {
+          for (let i = tempData.length - 1; i > 0; i--) {
+            for (let j = 0; j < i; j++) {
+              if (tempData[j].umur > tempData[j + 1].umur) {
+                const temp = tempData[j];
+                tempData[j] = tempData[j + 1];
+                tempData[j + 1] = temp;
+              }
+            }
+          }
+          nameDir = "desc";
+        } else {
+          for (let i = tempData.length - 1; i > 0; i--) {
+            for (let j = 0; j < i; j++) {
+              if (tempData[j].umur < tempData[j + 1].umur) {
+                const temp = tempData[j];
+                tempData[j] = tempData[j + 1];
+                tempData[j + 1] = temp;
+              }
+            }
+          }
+          nameDir = "asc";
+        }
+        showData(tempData);
+      }
+
+      function sortByJob() {
+        var tempData = data;
+        if (nameDir == "asc") {
+          for (let i = tempData.length - 1; i > 0; i--) {
+            for (let j = 0; j < i; j++) {
+              if (tempData[j].pekerjaan > tempData[j + 1].pekerjaan) {
+                const temp = tempData[j];
+                tempData[j] = tempData[j + 1];
+                tempData[j + 1] = temp;
+              }
+            }
+          }
+          nameDir = "desc";
+        } else {
+          for (let i = tempData.length - 1; i > 0; i--) {
+            for (let j = 0; j < i; j++) {
+              if (tempData[j].pekerjaan < tempData[j + 1].pekerjaan) {
+                const temp = tempData[j];
+                tempData[j] = tempData[j + 1];
+                tempData[j + 1] = temp;
+              }
+            }
+          }
+          nameDir = "asc";
+        }
+        showData(tempData);
+      }
+      function sortByGender() {
+        var tempData = data;
+        if (nameDir == "asc") {
+          for (let i = tempData.length - 1; i > 0; i--) {
+            for (let j = 0; j < i; j++) {
+              if (tempData[j].gender > tempData[j + 1].gender) {
+                const temp = tempData[j];
+                tempData[j] = tempData[j + 1];
+                tempData[j + 1] = temp;
+              }
+            }
+          }
+          nameDir = "desc";
+        } else {
+          for (let i = tempData.length - 1; i > 0; i--) {
+            for (let j = 0; j < i; j++) {
+              if (tempData[j].gender < tempData[j + 1].gender) {
+                const temp = tempData[j];
+                tempData[j] = tempData[j + 1];
+                tempData[j + 1] = temp;
+              }
+            }
+          }
+          nameDir = "asc";
+        }
+        showData(tempData);
+      }
+    </script>
+  </body>
+</html>

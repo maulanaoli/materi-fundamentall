@@ -1,0 +1,108 @@
+<script>
+  //buat aplikas belanja
+  //2 input -> login as user atau login as admin
+  // admin -> tambah, kurang barang'
+  //user -> belanja
+  //belanja -> berulang kali dalam 1 sesi
+
+  //================ FUNCTION MENU ADMIN====================
+  function insertproduk() {}
+  function chart() {}
+
+  function MenuAdmin() {
+    while ((repeatMenuAdmin = true)) {
+      var adminMenu = prompt(
+        "Admin Menu \n1. Show Product \n2. Input Produk \n3. Delete Produk \n4. Back to Menu"
+      );
+
+      if (adminMenu == 1) {
+        var showProduk = "";
+        for (i = 0; i < arrItem.length; i++) {
+          showProduk += i + 1 + ". " + arrItem[i] + " Rp." + arrPrice[i] + "\n";
+        }
+        alert(showProduk);
+      } else if (adminMenu == 2) {
+        repeatTambahItem = true;
+        while (repeatTambahItem) {
+          tambahItem = prompt("Input Produk yang ingin ditambahkan");
+          if (arrItem.includes(tambahItem)) {
+            alert("Item telah Tersedia");
+            repeatTambahItem = true;
+          } else {
+            repeatTambahItem = false;
+            arrItem.push(tambahItem);
+          }
+        }
+        tambahHarga = prompt("Input harga yang di inginkan");
+
+        arrPrice.push(tambahHarga);
+        repeatMenuAdmin = true;
+      } else if (adminMenu == 3) {
+        repeatHapusProduk = true;
+        while (repeatHapusProduk) {
+          hapusProduk = prompt("Input Produk yang ingin di hapus");
+          if (arrItem.includes(hapusProduk)) {
+            arrItem.splice(arrItem.indexOf(hapusProduk), 1);
+            arrPrice.splice(arrItem.indexOf(hapusProduk), 1);
+            repeatHapusProduk = false;
+          } else {
+            alert("Item memang tidak tersedia");
+            repeatHapusProduk = true;
+          }
+
+          repeatMenuAdmin = true;
+        }
+      } else if (adminMenu == 4) {
+        return (repeat = true);
+      }
+    }
+  }
+
+  //========== FUNCTION MENU USER==========
+  function MenuUser() {
+    var userMenu = prompt(
+      "1. Go Shopping \n2. Show cart \n3. Checkout \n4. Back to Menu"
+    );
+    var produkShop = "";
+    var chart = [];
+
+    if (userMenu == 1) {
+      var showProduk = "";
+      for (i = 0; i < arrItem.length; i++) {
+        showProduk += i + 1 + ". " + arrItem[i] + " Rp." + arrPrice[i] + "\n";
+      }
+      goShopping = prompt(showProduk);
+    } else if (userMenu == 2) {
+    } else if (userMenu == 3) {
+      ("checkout");
+    } else if (userMenu == 4) {
+      return (repeat = true);
+    }
+  }
+
+  var repeat = true;
+  var arrItem = ["jeruk", "kiwi", "apel"];
+  var arrPrice = [20000, 25000, 30000];
+  while (repeat) {
+    //===========MENNU LOGIN==========
+    var menu = prompt("Login  \n1. Admin \n2. User \n3. Exit");
+    if (menu == 1 || menu == 2 || menu == 3) {
+      repeat = false;
+    } else {
+      alert("Invalid input");
+      repeat = true;
+    }
+    if (menu == 1) {
+      MenuAdmin();
+    } else if (menu == 2) {
+      MenuUser();
+    } else if (menu == 3) {
+      alert("terimakasih");
+      break;
+    }
+    if (goShopping == 1) {
+      chart.push(arrItem.length[goShopping]);
+    }
+    alert(chart);
+  }
+</script>

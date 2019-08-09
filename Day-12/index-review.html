@@ -97,43 +97,86 @@
         <tbody></tbody>
       </table>
     </div>
-  </body>
 
-  <script>
-    class Person {
-      constructor(name, age, job) {
-        (this.nama = name), (this.umur = age), (this.pekerjaan = job);
+    <script>
+      class Person {
+        constructor(nama, umur, pekerjaan) {
+          (this.nama = nama), (this.umur = umur), (this.pekerjaan = pekerjaan);
+        }
       }
-    }
-    var data = [
-      new Person("Andi", "23", "Coder"),
-      new Person("Seto", "43", "Developer"),
-      new Person("Budi", "13", "CEO"),
-      new Person("Anton", "23", "Student"),
-      new Person("Andre", "43", "Big boss"),
-      new Person("Max", "53", "Cogan")
-    ];
-
-    function showData(arr) {
-      var hasil = "";
-      for (var i = 0; i < arr.length; i++) {
-        hasil += `<tr>
+      var data = [
+        new Person("Andi", "23", "Coder"),
+        new Person("Seto", "43", "Developer"),
+        new Person("Budi", "13", "CEO"),
+        new Person("Anton", "23", "Student"),
+        new Person("Andre", "43", "Big boss"),
+        new Person("Max", "53", "Cogan")
+      ];
+      var nameDir = "asc";
+      function showData(arr) {
+        var hasil = "";
+        for (var i = 0; i < arr.length; i++) {
+          hasil += `<tr>
                         <td>${arr[i].nama}</td>
                         <td>${arr[i].umur}</td>
                         <td>${arr[i].pekerjaan}</td>
-                 </tr>`;
+                        </tr>`;
+        }
+        document.getElementsByTagName("tbody")[0].innerHTML = hasil;
       }
-      document.getElementsByTagName("tbody")[0].innerHTML = hasil;
-    }
-
-    function addData() {
-      inputnama = document.getElementById("nama").value;
-      inputumur = document.getElementById("umur").value;
-      inputpekerjaan = document.getElementById("pekerjaan").value;
-      var newData = new Person(inputnama, inputumur, inputpekerjaan);
-      data[data.length] = newData;
+      function addData() {
+        var inputNama = document.getElementById("nama").value;
+        var inputUmur = document.getElementById("umur").value;
+        var inputPekerjaan = document.getElementById("pekerjaan").value;
+        var newData = new Person(inputNama, inputUmur, inputPekerjaan);
+        data[data.length] = newData;
+        showData(data);
+      }
       showData(data);
-    }
-    showData(data);
-  </script>
+      function filterData() {
+        var filterName = document.getElementById("filter-name").value;
+        var filterAge = document.getElementById("filter-age").value;
+        var filterJob = document.getElementById("filter-job").value;
+        var tempData = [];
+        // alert(filterName)
+        for (var i = 0; i < data.length; i++) {
+          if (
+            data[i].nama.startsWith(filterName) &&
+            data[i].pekerjaan.startsWith(filterJob) &&
+            data[i].umur.startsWith(filterAge)
+          ) {
+            tempData.push(data[i]);
+          }
+        }
+        showData(tempData);
+      }
+      function sortByName() {
+        var tempData = data;
+        if (nameDir == "asc") {
+          for (let i = tempData.length - 1; i > 0; i--) {
+            for (let j = 0; j < i; j++) {
+              if (tempData[j].nama > tempData[j + 1].nama) {
+                const temp = tempData[j];
+                tempData[j] = tempData[j + 1];
+                tempData[j + 1] = temp;
+              }
+            }
+          }
+          nameDir = "desc";
+        } else {
+          for (let i = tempData.length - 1; i > 0; i--) {
+            for (let j = 0; j < i; j++) {
+              if (tempData[j].nama < tempData[j + 1].nama) {
+                const temp = tempData[j];
+                tempData[j] = tempData[j + 1];
+                tempData[j + 1] = temp;
+              }
+            }
+          }
+          nameDir = "asc";
+        }
+        showData(tempData);
+      }
+    </script>
+  </body>
 </html>

@@ -1,0 +1,30 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+h3 {
+  text-align: center;
+}
+
+form > div.row {
+  text-align: center;
+}
+.tombolmenu {
+  text-align: center;
+}
+
+div.container-filter {
+  text-align: center;
+}
+
+table.container-table {
+  margin-left: auto;
+  margin-right: auto;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 3px 3px;
+}

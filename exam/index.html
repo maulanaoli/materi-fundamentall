@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body class="container">
+    <style>
+      img {
+        width: 75px;
+      }
+      .button-succes {
+        background-image: linear-gradient(
+          to right,
+          #ff6e7f 0%,
+          #bfe9ff 51%,
+          #ff6e7f 100%
+        );
+      }
+      .btn-grad:hover {
+        background-position: right center;
+      }
+    </style>
+    <center>
+      <h3>Products</h3>
+      <table class="table table-bordered text-center">
+        <thead>
+          <tr>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Gambar</th>
+            <th>Add</th>
+          </tr>
+        </thead>
+        <tbody id="pokemon"></tbody>
+        <tfoot>
+          <tr>
+            <td>
+              <input
+                placeholder="Input item name"
+                type="text"
+                id="name"
+                class="form-control"
+              />
+            </td>
+            <td>
+              <input
+                placeholder="Input price"
+                type="number"
+                id="price"
+                class="form-control"
+              />
+            </td>
+            <td>
+              <input
+                placeholder="Input img link"
+                type="text"
+                id="pic"
+                class="form-control"
+              />
+            </td>
+            <td>
+              <input
+                type="button"
+                onclick="addItem()"
+                value="ADD ITEM"
+                class="btn btn-primary"
+              />
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <h3 id="sasuke">cart anda kosong</h3>
+      <p id="jiraya"></p>
+      <table class="table table-bordered text-center">
+        <thead id="sakura"></thead>
+        <tbody id="naruto"></tbody>
+      </table>
+      <h3></h3>
+      <p id="hitungmundur"></p>
+      <table id="checkout" class="table table-bordered text-center">
+        <thead></thead>
+        <tbody>
+          <tr id="check">
+            <td>
+              <input
+                class="btn btn-success"
+                onclick="checkOut()"
+                type="button"
+                value="Checkout"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </center>
+    <script>
+      class Product {
+        constructor(nama, harga, gambar) {
+          (this.nama = nama), (this.harga = harga), (this.gambar = gambar);
+        }
+      }
+      var data = [
+        new Product("kacang", 20000, "./kacang.jpeg"),
+        new Product("susu", 10000, "./susu.jpeg"),
+        new Product("roti", 5000, "./roti.jpeg")
+      ];
+      var cartProduct = [];
+      var cartQty = [];
+      var hasil1 = `<tr>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Gambar</th>
+            <th>Quantity</th>
+            <th>Delete</th>
+          </tr>`;
+      showData = arr => {
+        let hasil = "";
+        arr.map((val, idx) => {
+          hasil += `<tr>
+                                <td>${val.nama.charAt(0).toUpperCase() +
+                                  val.nama.slice(1, val.nama.length)}</td>
+                                <td>${val.harga}</td>
+                                <td><img src="${val.gambar}" /></td>
+                                <td><input type="button" value="ADD TO CART" class="btn btn-success" onclick="addProduct(${idx})" /></td>
+                            </tr>`;
+        });
+        /**
+         * <tr>
+         *  <td>kacang</td>
+         *  <td>20000</td>
+         *  <td><img src="./kacang.jpeg"/></td>
+         *  <td><input type="button" value="ADD TO CART" class="btn btn-success" onclick="addProduct(0)" /></td>
+         * </tr>
+         * <tr>
+         *  <td>susu</td>
+         *  <td>10000</td>
+         *  <td><img src="./susu.jpeg"/></td>
+         *  <td><input type="button" value="ADD TO CART" class="btn btn-success" onclick="addProduct(1)" /></td>
+         * </tr>
+         */
+        document.getElementsByClassName("sakura").innerHTML = hasil1;
+        document.getElementById("pokemon").innerHTML = hasil;
+      };
+      addProduct = idx => {
+        tanya = confirm(
+          `apakah anda ingin menambahkan ${data[idx].nama} kedalam produk anda?`
+        );
+        do {
+          if (tanya == true) {
+            var qty = parseInt(prompt("Berapa banyak?"));
+            if (qty > 0) {
+              repeatAdd = false;
+            } else {
+              alert("invalid input");
+              repeatAdd = true;
+            }
+          } else {
+            return;
+          }
+        } while (repeatAdd);
+
+        if (cartProduct.includes(data[idx])) {
+          var x = cartProduct.indexOf(data[idx]);
+          var y = cartQty[x] + qty;
+          cartQty[x] = y;
+
+          //chartqty[chartprotuct.indexof(arrproduct[idx])]
+        } else {
+          cartProduct.push(data[idx]);
+          cartQty.push(qty);
+        }
+
+        showCart(cartProduct);
+      };
+      addItem = () => {
+        inputNama = document.getElementById("name").value;
+        inputHarga = document.getElementById("price").valueAsNumber;
+        inputPicture = document.getElementById("pic").value;
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].nama.toUpperCase().includes(inputNama.toUpperCase())) {
+            alert("item sudah ada");
+            return;
+          }
+        }
+        data.push(new Product(inputNama, inputHarga, inputPicture));
+        showData(data);
+        document.getElementById("name").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("pic").value = "";
+      };
+      showCart = arr => {
+        let hasil = `<tr>
+            <th>Nama</th>
+            <th>Harga</th>
+            <th>Gambar</th>
+            <th>Quantity</th>
+            <th>Delete</th>
+          </tr>`;
+        arr.map((val, idx) => {
+          hasil += `<tr>
+                                <td>${val.nama}</td>
+                                <td>${val.harga}</td>
+                                <td><img src="${val.gambar}" /></td>
+                                <td>${cartQty[idx]}</td>
+                                <td><input type="button" value="DELETE" class="btn btn-danger" onclick="deleteCart(${idx})"></td>
+                            </tr>`;
+        });
+        document.getElementById("naruto").innerHTML = hasil;
+        var total = 0;
+        totalHarga = 0;
+        for (var i = 0; i < cartQty.length; i++) {
+          total += cartQty[i];
+        }
+        for (var j = 0; j < cartQty.length; j++) {
+          totalHarga += cartProduct[j].harga * cartQty[j];
+        }
+        if (cartProduct.length <= 0) {
+          document.getElementById("sasuke").innerHTML = "Cart anda kosong";
+        } else {
+          document.getElementById(
+            "sasuke"
+          ).innerHTML = `total item dalam chart anda = ${total} </br>`;
+          document.getElementById(
+            "jiraya"
+          ).innerHTML = `total harga = Rp. ${totalHarga}`;
+        }
+      };
+      showData(data);
+
+      deleteCart = idx => {
+        tanya = confirm("apakah anda yakin delete item ini?");
+        do {
+          if (tanya == true) {
+            var qty = parseInt(prompt("hapus berapa banyak?"));
+            if (qty > 0) {
+              repeatDell = false;
+            } else {
+              alert("invalid input");
+              repeatDell = true;
+            }
+          } else {
+            return;
+          }
+        } while (repeatDell);
+        cartQty[idx] -= qty;
+        if (cartQty[idx] <= 0) {
+          cartProduct.splice(idx, 1);
+          cartQty.splice(idx, 1);
+          showCart(cartProduct);
+          document.getElementById("jiraya").innerHTML = ``;
+        } else {
+          showCart(cartProduct);
+        }
+      };
+
+      checkOut = () => {
+        var hasil = "";
+
+        hasil += `<td><input type='number' id='masukanuang'  placeholder='Masukan uang anda'/></td>
+                  <td><input type='button' onclick='bayar()' value='bayar'/></td>`;
+        if (cartProduct.length <= 0) {
+          alert("cart kosong");
+        } else {
+          document.getElementById("check").innerHTML = hasil;
+          var durasi = 30;
+          window.value = setInterval(() => {
+            durasi -= 1;
+            if (durasi == -1) {
+              clearInterval(window.value);
+              alert("waktu habis");
+              cartProduct = [];
+              cartQty = [];
+              document.getElementById("jiraya").innerHTML = "";
+              document.getElementById("naruto").innerHTML = "";
+              document.getElementById("sasuke").innerHTML =
+                "<h3>Cart Anda kosong</h3>";
+              document.getElementById("check").innerHTML = `<td>
+              <input onclick="checkOut()" class='btn btn-success' type="button" value="Checkout" />
+            </td>`;
+              document.getElementById("hitungmundur").innerHTML = "";
+            } else {
+              document.getElementById("hitungmundur").innerHTML =
+                "lakukan pembayaran sebelum " + durasi + " detik";
+            }
+          }, 1000);
+        }
+      };
+      bayar = () => {
+        inputUang = document.getElementById("masukanuang").value;
+        var total = 0;
+        var totalHarga = 0;
+        for (i = 0; i < cartProduct.length; i++) {
+          total += cartQty[i];
+        }
+        for (var j = 0; j < cartQty.length; j++) {
+          totalHarga += cartProduct[j].harga * cartQty[j];
+        }
+
+        if (inputUang < totalHarga) {
+          alert("uang anda kurang Rp. " + (totalHarga - inputUang));
+          document.getElementById("masukanuang").value = "";
+        } else if (inputUang == totalHarga || inputUang > totalHarga) {
+          clearInterval(window.value);
+          document.getElementById("hitungmundur").innerHTML = "";
+          if (inputUang == totalHarga) {
+            alert("Uang anda pas");
+            document.getElementById("check").innerHTML = `<td>
+              <input onclick="checkOut()" class='btn btn-success' type="button" value="Checkout" />
+            </td>`;
+          } else {
+            alert("kembalian uang anda = Rp. " + (inputUang - totalHarga));
+            document.getElementById("check").innerHTML = `<td>
+              <input onclick="checkOut()" class='btn btn-success' type="button" value="Checkout" />
+            </td>`;
+          }
+          var hasil = `<td><input onclick="checkOut()" class='btn btn-success type="button" value="Checkout" /></td>`;
+
+          cartProduct = [];
+          cartQty = [];
+          document.getElementById("naruto").innerHTML = "";
+          document.getElementById("sasuke").innerHTML =
+            "<h3>Cart Anda kosong</h3>";
+
+          document.getElementById("jiraya").innerHTML = ``;
+        }
+      };
+    </script>
+  </body>
+</html>

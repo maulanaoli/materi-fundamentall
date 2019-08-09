@@ -1,0 +1,130 @@
+<script>
+  //pilih mau hitung apa?
+  //a. segitiga
+  //b. trapesium
+  //c Persegi panjang
+  //d detik --> jam
+  var repeat = true;
+  while (repeat) {
+    // =============MENU PROGRAM=============
+    do {
+      var menuprogram = prompt(
+        "MENU PROGRAM \na. segitiga \nb. trafesium \nc. Persegi panjang \nd. detik"
+      );
+      if (
+        menuprogram.toUpperCase() == "A" ||
+        menuprogram.toUpperCase() == "B" ||
+        menuprogram.toUpperCase() == "C" ||
+        menuprogram.toUpperCase() == "D"
+      ) {
+        var repeatMenu = false;
+      } else {
+        alert(" input Hanya A - D ");
+        repeatMenu = true;
+      }
+    } while (repeatMenu);
+    //===============MENU SEGITIGA===================
+    if (menuprogram.toUpperCase() == "A") {
+      do {
+        var segitigaAlas = parseInt(
+          prompt("MENGHITUNG LUAS SEGITIGA \n    \tMasukan panjang alas")
+        );
+        if (segitigaAlas < 1000000000) {
+          var repeatAlas = false;
+        } else {
+          repeatAlas = true;
+          alert("HANYA MASUKAN ANGKA ");
+        }
+      } while (repeatAlas);
+      do {
+        var segitigaTinggi = parseInt(prompt("masukan tinggi"));
+        if (segitigaTinggi < 100000000000) {
+          var repeatTinggi = false;
+        } else {
+          repeatTinggi = true;
+          alert("HANYA MASUKAN ANGKA ");
+        }
+      } while (repeatTinggi);
+      var hasilLuasaSegitiga = 0.5 * (segitigaAlas * segitigaTinggi);
+      alert("hasil Luas segitiga = " + hasilLuasaSegitiga);
+      repeat = confirm("apakah anda ingin mengulang?");
+
+      //====================MENU TRAPESIUM
+    } else if (menuprogram.toUpperCase() == "B") {
+      alert("Rumus menghitung Luas Trapesium = 1/2 x (a+b) x t");
+      do {
+        var sisiA = parseInt(prompt("Masukan sisi sejajar a Trapesium"));
+        if (sisiA < 1000000) {
+          var repeatSisiA = false;
+        } else {
+          repeatSisiA = true;
+          alert("Masukan hanya angka");
+        }
+      } while (repeatSisiA);
+      do {
+        var sisiB = parseInt(prompt("Masukan sisi sejajar b Trapesium"));
+        if (sisiA < 1000000) {
+          var repeatSisiB = false;
+        } else {
+          repeatSisiB = true;
+          alert("Masukan hanya angka");
+        }
+      } while (repeatSisiB);
+      do {
+        var tinggi = parseInt(prompt("Masukan tinggi Trapesium"));
+        if (tinggi < 1000000) {
+          var repeatTinggi = false;
+        } else {
+          repeatTinggi = true;
+          alert("Masukan hanya angka");
+        }
+      } while (repeatTinggi);
+      var luas = 0.5 * (sisiA + sisiB) * tinggi;
+      alert("Hasil Luas Trapesium = " + luas);
+      repeat = confirm("apakah anda mau mengulang?");
+      //=====================MENU PERSEGI PANJANG===============
+    } else if (menuprogram.toUpperCase() == "C") {
+      alert("Rumus menghitung Luas Persegi panjang : \n Panjang x Lebar");
+      do {
+        var Panjang = parseInt(prompt("Masukan panjang Persegi Panjang"));
+        if (Panjang < 1000000) {
+          var repeatTinggi = false;
+        } else {
+          repeatTinggi = true;
+          alert("Masukan hanya angka");
+        }
+      } while (repeatTinggi);
+      do {
+        var Lebar = parseInt(prompt("Masukan Lebar Persegi Panjang"));
+        if (Lebar < 1000000) {
+          var repeatTinggi = false;
+        } else {
+          repeatTinggi = true;
+          alert("Masukan hanya angka");
+        }
+      } while (repeatTinggi);
+      var luas = Panjang * Lebar;
+      alert("Hasil perhitungan luas Persegi Panjang =" + luas);
+      repeat = confirm("apakah anda ingin mengulang?");
+      //================= MENU CONVERT=============
+    } else if (menuprogram.toUpperCase() == "D") {
+      alert(
+        "INI ADALAH MENU CONVERT JAM KE MENIT DAN DETIK \ncontoh : 1 jam = 60 menit"
+      );
+      var jam = parseInt(prompt("JAM \n Masukan angka yang ingin di Convert"));
+      var Convert = parseInt(
+        prompt("Convert jam ke \n1. Menit \n2.Detik \n3. Convert ke keduanya")
+      );
+      var menit = jam * 60;
+      var detik = jam * 360;
+      if (Convert == 1) {
+        alert(jam + "jam = " + menit + " menit");
+      } else if (Convert == 2) {
+        alert(jam + "jam  = " + detik + "detik");
+      } else if (Convert == 3) {
+        alert(jam + "jam = " + menit + " menit dan " + detik + " detik");
+      }
+      repeat = confirm("apakah anda ingin mengulang?");
+    }
+  }
+</script>

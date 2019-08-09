@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var MenuParkir;
+      var tarifParkir = 0;
+      var totalJamParkir;
+      var denda = 0;
+      var jumlahBayar = 0;
+      var kembali = false;
+
+      jamMasuk = prompt("masukan jam Masuk");
+      jamKeluar = prompt("masukan jam keluar");
+      tipeKendaraan = prompt("1. Sepeda Motor \n2. Mobil \n3. Bus");
+
+      totalJamParkir = jamKeluar - jamMasuk;
+      switch (tipeKendaraan) {
+        case "1":
+          tarifParkir = totalJamParkir * 2000;
+          break;
+
+        case "2":
+          tarifParkir = totalJamParkir * 5000;
+          break;
+
+        case "3":
+          tarifParkir = totalJamParkir * 7000;
+          break;
+
+        default:
+          tarifParkir = 0;
+          break;
+      }
+      alert("jam masuk = " + jamMasuk + "WIB");
+      alert("jam keluar = " + jamKeluar + "WIB");
+      alert("tota waktu parkir =" + totalJamParkir + "jam");
+      alert("tarif parkir Rp." + tarifParkir);
+      if (tipeKendaraan == 1) {
+        alert("Tipe kendaraan : sepeda motor");
+      } else if (tipeKendaraan == 2) {
+        alert("tipe Kendaraan : Mobil");
+      } else if (tipeKendaraan == 3) {
+        alert("Tipe kendaraan : Bus");
+      } else {
+        alert("kendaraan tidak terdaftar");
+      }
+
+      var ya = prompt(
+        "apakah anda member?\n 1. ya saya member\n2. Bukan member"
+      );
+      if (ya == 1) {
+        hitungBayarMember;
+      } else {
+        hitungbayar();
+      }
+
+      for (let i = totalJamParkir; i >= 6; i++) {
+        var jamDenda = totalJamParkir - 6;
+        denda = jamDenda * 2000;
+
+        alert("denda: Rp " + denda);
+      }
+    </script>
+  </body>
+</html>

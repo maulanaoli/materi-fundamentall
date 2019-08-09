@@ -1,0 +1,51 @@
+<script>
+  do {
+    var hasil = "";
+
+    var jenisProgram = prompt(
+      "MENU : \n1. Segitiga Siku - Siku\n2. Segitiga Sama kaki\n3. Belanja\n4. Exit"
+    );
+
+    if (jenisProgram == 1) {
+      var segitigaSiku = prompt(
+        "SEGITIGA SIKU - SIKU \n1. Siku Atas \n2. Siku Bawah"
+      );
+
+      if (segitigaSiku == 1) {
+        var baris = prompt("Pilih baris (1 - 10)");
+        for (var i = 0; i < baris; i++) {
+          hasil += "*";
+
+          for (var j = 0; j < i; j++) {
+            hasil += "*";
+          }
+          hasil += "\n";
+        }
+        alert(hasil);
+      } else if (segitigaSiku == 2) {
+        var baris = prompt("Pilih baris (1 - 10)");
+        for (var i = 1; i <= baris; i++) {
+          hasil += " *";
+          for (var j = baris; j > i; j--) {
+            hasil += " *";
+          }
+          hasil += "\n";
+        }
+        alert(hasil);
+      } else {
+        alert("jawaban hanya 1 dan 2");
+      }
+    } else if (jenisProgram == 2) {
+      alert("COOMING SOON!");
+    } else if (jenisProgram == 3) {
+      belanja = prompt(
+        "MENU BELANJA \n1. Ayam = 10.000/pcs \n2. Sapi = 25.000/pcs \n3. Salmon = 30.000/pcs"
+      );
+    } else if (jenisProgram == 4) {
+      belanja = prompt(
+        "MENU BELANJA \n1. Ayam = 10.000/pcs \n2. Sapi = 25.000/pcs \n3. Salmon = 30.000/pcs"
+      );
+    }
+  } while (confirm("apakah anda ingin mengulang?"));
+  alert("terimakasih sudah mampir");
+</script>

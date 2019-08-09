@@ -1,0 +1,36 @@
+<script>
+  var Produk = ["apel", "jeruk", "kiwi"];
+  var Harga = [20000, 25000, 30000];
+  var Show = "";
+
+  function ShowProduct() {
+    for (i = 0; i < Produk.length; i++) {
+      Show += i + 1 + ". " + Produk[i] + " Rp." + Harga[i] + "\n";
+    }
+    return Show;
+  }
+  do {
+    var MenuLogin = prompt(
+      "Menu Login \n1. Login Admin \n2. Login User \n3. Exit"
+    );
+    if (MenuLogin == 1) {
+      do {
+        var MenuAdmin = prompt(
+          "MENU ADMIN \n1. Show Product \n2. Input Produk \n3. Delete Produk \n4. Back"
+        );
+        if (MenuAdmin == 1) {
+          alert(ShowProduct());
+        }
+        var RepeatAdmin = true;
+      } while (RepeatAdmin);
+    } else if (MenuLogin == 2) {
+      do {
+        var InputProduk = prompt("Masukan item yang ingin di input");
+        if (Produk.includes(InputProduk)) {
+          alert("Item telah tersedia");
+          repeatMenu = true;
+        }
+      } while (RepeatInput);
+    }
+  } while (repeatMenu);
+</script>

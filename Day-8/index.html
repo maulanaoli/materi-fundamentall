@@ -1,0 +1,159 @@
+<script>
+  var arrProduct = ["Jeruk", "Apel", "Kiwi"];
+  var arrPrice = [20000, 25000, 30000];
+  var ChartProdcut = [];
+  var ChartPrice = [];
+  var CharQty = [];
+
+  var repeat = true;
+
+  //==========KUMPULAN FUNCTION==========
+  function show() {
+    var hasil = "";
+    for (var i = 0; i < arrProduct.length; i++) {
+      hasil += i + 1 + ". " + arrProduct[i] + " Rp. " + arrPrice[i] + "\n";
+    }
+    return hasil;
+  }
+  function inputBarang(barang, Harga) {
+    arrProduct.push(barang);
+    arrPrice.push(Harga);
+  }
+
+  function hapusBarang(barang) {
+    var idx = arrProduct.indexOf(barang);
+    arrPrice.splice(idx, 1);
+    arrProduct.splice(idx, 1);
+  }
+  function AddCart(barang, banyak) {
+    var idx = barang - 1;
+    if (ChartProdcut.includes(arrProduct[idx])) {
+      var x = ChartProdcut.indexOf(arrProduct[idx]);
+      var y = CharQty[x] + banyak;
+      CharQty[x] = y;
+
+      //chartqty[chartprotuct.indexof(arrproduct[idx])]
+    } else {
+      ChartProdcut.push(arrProduct[idx]);
+      ChartPrice.push(arrPrice[idx]);
+      CharQty.push(banyak);
+    }
+  }
+
+  function UserChart() {
+    var hasil = "";
+    for (var i = 0; i < ChartProdcut.length; i++) {
+      hasil +=
+        i + 1 + ". " + ChartProdcut[i] + " x " + CharQty[i] + " Buah" + "\n";
+    }
+    return hasil;
+  }
+
+  function UserCheckout() {
+    var totalPrice = "";
+    for (var i = 0; i < ChartProdcut.length; i++) {
+      totalPrice +=
+        i +
+        1 +
+        ". " +
+        ChartProdcut[i] +
+        " x " +
+        CharQty[i] +
+        " = " +
+        " Rp." +
+        ChartPrice[i] * CharQty[i] +
+        "\n";
+    }
+    var totarKeseluruhan = 0;
+    for (var i = 0; i < ChartProdcut.length; i++) {
+      totarKeseluruhan += ChartPrice[i] * CharQty[i];
+    }
+    do {
+      var cash = parseInt(
+        prompt(
+          totalPrice +
+            "\n Total Belanjaan anda = " +
+            totarKeseluruhan +
+            "\n Masukan jumlah uang anda"
+        )
+      );
+      if (cash < totarKeseluruhan) {
+        alert("Maaf uang anda kurang" + (totarKeseluruhan - cash));
+        var repeatCash = true;
+      } else if (cash > totarKeseluruhan) {
+        alert("Uang kembalian anda = " + (cash - totarKeseluruhan));
+        alert("Terimakasih");
+        CharQty = [];
+        ChartPrice = [];
+        ChartProdcut = [];
+        repeatCash = false;
+      } else if (cash == totarKeseluruhan) {
+        alert("Terimakasih telah Berkunjung");
+        CharQty = [];
+        ChartPrice = [];
+        ChartProdcut = [];
+        repeatCash = false;
+      }
+    } while (repeatCash);
+  }
+
+  //=====================================
+  do {
+    var MenuLogin = prompt("Login Sebagai \n1. Admin \n2. User \n3. Exit");
+    if (MenuLogin == 1) {
+      do {
+        var MenuAdmin = prompt(
+          "1. Show Product \n2. Input \n3. Delete \n4. Back"
+        );
+        if (MenuAdmin == 1) {
+          alert(show());
+          var repeatAdmin = true;
+        } else if (MenuAdmin == 2) {
+          var TambahBarang = prompt("Masukan nama barang");
+          var TambahHarga = prompt("Masukan Harga untukk Barang anda");
+          inputBarang(TambahBarang, TambahHarga);
+          alert("Barang telah ditambahkan");
+          repeat = false;
+          repeatAdmin = true;
+        } else if (MenuAdmin == 3) {
+          var PromptDelete = prompt("Masukan nama barang yang ingin dihapus");
+          hapusBarang(PromptDelete);
+          repeat = false;
+          repeatAdmin = true;
+        } else if (MenuAdmin == 4) {
+          repeatAdmin = false;
+          repeat = true;
+        }
+      } while (repeatAdmin);
+    } else if (MenuLogin == 2) {
+      do {
+        var UserMenu = prompt(
+          "User Menu \n1. Go Shopping \n2. Show Cart \n3. Checkout \n4. Back"
+        );
+
+        if (UserMenu == 1) {
+          var AddBarang = prompt("Pilih barang anda \n" + show());
+          var BanyakBarang = parseInt(prompt("Berapa yg ingin anda beli"));
+          AddCart(AddBarang, BanyakBarang);
+          repeat = false;
+          var RepeatUser = true;
+        } else if (UserMenu == 2) {
+          alert(UserChart());
+          repeat = false;
+          RepeatUser = true;
+        } else if (UserMenu == 3) {
+          UserCheckout();
+          RepeatUser = false;
+          repeat = true;
+        } else if (UserMenu == 4) {
+          RepeatUser = false;
+          repeat = true;
+        }
+      } while (RepeatUser);
+    } else if (menulogin == 3) {
+      alert("Terimakasih");
+      break;
+    } else if (menulogin == 4) {
+    }
+  } while (repeat);
+</script>

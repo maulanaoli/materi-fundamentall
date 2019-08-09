@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .tableContainer {
+        width: 210px;
+        border: 1px solid whitesmoke;
+        background-color: whitesmoke;
+        font-size: 21px;
+      }
+    </style>
+    <div class="tableContainer">
+      <h1>Drawing Tools</h1>
+      <br />
+      <div class="MenuPilihan">
+        <p>
+          Pilihan Bentuk <br />
+          1.Persegi Panjang <br />2. Segitiga Siku Kiri <br />3.Segitiga siku
+          kanan <br />4. Segitiga Sama Kaki <br />
+          5. Clear Display
+        </p>
+        <input id="input1" type="number" placeholder="pilih Menu" />
+        <br /><br />
+        <input class="inputUser" id="input2" type="number" /><br /><br />
+        <input id="myBtn" type="Button" value="SUBMIT" onclick="submitUser()" />
+      </div>
+      <br /><br />
+      <div class="Hasil" id="tampil"></div>
+    </div>
+
+    <script>
+      submitUser = () => {
+        var len = document.getElementsByTagName("input")[1].valueAsNumber;
+        var inputanUSer = document.getElementsByTagName("input")[0]
+          .valueAsNumber;
+
+        var ShowHasil = document.getElementsByClassName("Hasil")[0];
+        var input = document
+          .getElementById("input2")
+          .addEventListener("keyup", function(event) {
+            if (event.keyCode === 13) {
+              document.getElementById("myBtn").click();
+            }
+          });
+
+        //----
+        if (inputanUSer == 1) {
+          document.getElementById("tampil").style.textAlign = "center";
+          var hasil = "";
+          for (var i = 0; i < len; i++) {
+            for (p = 0; p < len; p++) {
+              hasil += " *";
+            }
+            hasil += "<br>";
+          }
+          ShowHasil.innerHTML = hasil;
+        } else if (inputanUSer == 2) {
+          document.getElementById("tampil").style.textAlign = "left";
+
+          var hasil = "";
+          for (var i = 0; i < len; i++) {
+            hasil += "*";
+
+            for (var j = 0; j < i; j++) {
+              hasil += "*";
+            }
+            hasil += "</br>";
+          }
+          ShowHasil.innerHTML = hasil;
+        } else if (inputanUSer == 3) {
+          document.getElementById("tampil").style.textAlign = "right";
+          var hasil = "";
+          for (var i = 0; i < len; i++) {
+            hasil += "*";
+
+            for (var j = 0; j < i; j++) {
+              hasil += "*";
+            }
+            hasil += "</br>";
+          }
+          ShowHasil.innerHTML = hasil;
+        } else if (inputanUSer == 4) {
+          var x = "";
+          document.getElementById("tampil").style.textAlign = "left";
+          var hasil = "";
+          for (let i = 0; i < len; i++) {
+            for (let k = 0; k <= len - i; k++) {
+              x += " ";
+            }
+            for (let j = 1; j <= i; j++) {
+              x += " * ";
+            }
+            x += " * " + "</br>";
+          }
+          document.getElementById("tampil").style.textAlign = "center";
+          ShowHasil.innerHTML = x;
+        } else if (inputanUSer == 5) {
+          ShowHasil.innerHTML = "";
+        } else {
+          alert("Masukan 1 - 5");
+        }
+      };
+    </script>
+  </body>
+</html>

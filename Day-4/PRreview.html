@@ -1,0 +1,168 @@
+<script>
+  //Prompt daftar menu: 1. Segitiga siku2 2. Segitiga Sama kaki 3. Belanja 4.
+  //prompt = Berapa baris (HANYA 1 - 10)
+  // Kalau lebih --> alert "1 - 10 saja!"
+
+  //segitiga siku siku
+  //prompt = siku atas atau bawah?
+  //prompt = 1-10
+
+  //belanja
+  //ayam = 10000
+  //sapi = 25000
+  //salmon = 30000
+  //klik barang muncul prompt berapa buah?
+  //total belanja = ...
+  //confirm mau lagi?
+
+  // fikri@dilizents.com
+  // due date sebelum jam 6 sore
+
+  var repeat = true;
+  var cont = true;
+  var repeatLen;
+  var repeatMenu;
+  var repeatSub;
+  var item;
+  var itemQnt;
+  var price;
+
+  while (repeat) {
+    var input = prompt(
+      "MENU \n \n1. Segitiga siku-siku \n2. Segitiga sama kaki \n3. Belanja \n4. Exit"
+    );
+
+    var z = ""; // Reset z jadi kosong
+
+    var len = 0;
+
+    // Segitiga Siku
+
+    if (input == "1") {
+      do {
+        var siku = prompt(
+          "Segitiga siku-siku \n \n1. Siku atas \n2. Siku Bawah"
+        );
+        if (siku == "1" || siku == "2") {
+          repeatSub = false;
+        } else {
+          alert("Invalid Input!");
+          repeatSub = true;
+        }
+      } while (repeatSub);
+      do {
+        len = parseInt(prompt("Berapa Baris? (1-10)"));
+        if (len <= 10 && len >= 1) {
+          repeatLen = false;
+        } else {
+          alert("Invalid Input!(1-10 saja!)");
+          repeatLen = true;
+        }
+      } while (repeatLen);
+    }
+    //Segitiga sama kaki
+    else if (input == "2") {
+      do {
+        len = parseInt(prompt("Segitiga sama kaki \n \nBerapa Baris? (1-10)"));
+        if (len <= 10 && len >= 1) {
+          repeatLen = false;
+        } else {
+          alert("Invalid Input! (1-10 saja!)");
+          repeatLen = true;
+        }
+      } while (repeatLen);
+    }
+    //Belanja
+    else if (input == "3") {
+      // alert("TEST BELANJA")
+    }
+    //Exit
+    else if (input == "4") {
+      // Supaya gak masuk ke else
+    } else {
+      alert("Invalid input!");
+      repeat = true;
+    }
+
+    // Code segitiga2 bintang
+
+    if (input == "1" && siku == "1") {
+      //Segitiga siku atas
+
+      for (var k = 0; k < len; k++) {
+        for (var i = 0; i <= k; i++) {
+          z += "*";
+        }
+        z += "\n";
+      }
+      alert(z);
+      repeat = confirm("Mau ulang?");
+    } else if (input == "1" && siku == "2") {
+      //Segitiga siku bawah
+      for (var i = 0; i < len; i++) {
+        for (var k = len; k > i; k--) {
+          z += "*";
+        }
+        z += "\n";
+      }
+      alert(z);
+      repeat = confirm("Mau ulang?");
+    } else if (input == "2") {
+      //Segitiga sama kaki
+      for (var k = 0; k < len; k++) {
+        for (var i = len; i >= k; i--) {
+          z += " ";
+        }
+        z += "*";
+        for (var j = 0; j < k; j++) {
+          for (var l = 0; l < 2; l++) {
+            z += "*";
+          }
+        }
+        z += "\n";
+      }
+      alert(z);
+      repeat = confirm("Mau ulang?");
+    }
+    //Belanja
+    else if (input == "3") {
+      var repeatShop;
+      do {
+        item = prompt(
+          "MENU BELANJA \n \n1. Ayam = 10.000 / pcs \n2. Sapi = 25.000 / pcs \n3. Salmon = 30.000 / pcs"
+        );
+
+        repeatShop = false;
+
+        if (item == "1") {
+          itemQnt = prompt("Berapa potong? (10.000/potong)");
+          price = 10000 * itemQnt;
+        } else if (item == "2") {
+          itemQnt = prompt("Berapa potong? (25.000/potong)");
+          price = 25000 * itemQnt;
+        } else if (item == "3") {
+          itemQnt = prompt("Berapa potong? (30.000/potong)");
+          price = 30000 * itemQnt;
+        } else {
+          alert("Invalid Input!");
+          repeatShop = true;
+        }
+        if (price == 0) {
+          alert("Invalid input!");
+          repeatShop = true;
+        } else if (price > 0) {
+          alert("Total harga anda adalah: Rp." + price);
+          repeat = confirm("Mau ulang?");
+        }
+      } while (repeatShop);
+    } else if (input == "4") {
+      alert("Anda telah keluar");
+      repeat = false;
+      alert("Testing masuk");
+    } else {
+      repeat = true;
+    }
+  }
+
+  // alert(z)
+</script>

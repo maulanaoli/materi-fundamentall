@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <h1>Purwadhika leage 2019</h1>
+  </head>
+  <body>
+    <script>
+      var pic = barca.jpg;
+      function showBarca() {
+        document.getElementById("showGambar").innerHTML =
+          '<img src="barca.jpg" width="100" ; height="60" ; />';
+      }
+
+      function showBayer() {
+        document.getElementById("showGambar").innerHTML =
+          '<img src="bayer.jpg" width="60" ; height="60" ; />';
+      }
+      function showMadrid() {
+        document.getElementById("showGambar").innerHTML =
+          '<img src="madrid.png" width="60" ; height="60" ; />';
+      }
+    </script>
+    <style>
+      .barca {
+        text-align: center;
+      }
+      h1,
+      p,
+      h3 {
+        text-align: center;
+      }
+      table {
+        border-collapse: collapse;
+        padding-bottom: 20px;
+      }
+      table,
+      th,
+      td {
+        border: 3px solid blue;
+        align-content: center;
+        text-align: center;
+      }
+      th {
+        width: 100;
+      }
+    </style>
+    <div class="tabelLiga">
+      <table border="1" align="center">
+        <tr>
+          <td>Rank</td>
+          <td>Club</td>
+          <td>
+            logo
+          </td>
+          <td>Function</td>
+          <td>level</td>
+          <td>ok</td>
+        </tr>
+        <tr>
+          <td>1 <sup>st</sup></td>
+          <td>Barcelona<sub> fc</sub></td>
+          <td>
+            <img src="barca.jpg" id="barca" width="100" ; height="60" ; />
+          </td>
+          <td>2x <sup>3</sup>+ 3x<sup>2</sup>-x-13</td>
+          <td>
+            <input type="radio" name="level1" value="Junior" />Junior
+            <input type="radio" name="level1" /> Professional
+          </td>
+          <td>
+            <input type="button" value="Show Logo" onclick="showBarca();" />
+          </td>
+        </tr>
+        <tr>
+          <td>2 <sup>nd</sup></td>
+          <td>Bayern <sub>Munich</sub></td>
+          <td>
+            <img src="bayer.jpg" id="bayer" alt="" width="60" height="60" />
+          </td>
+          <td>3y<sup>3</sup>-5y<sup>2</sup>-2y+3=0</td>
+          <td>
+            <input type="radio" name="level2" />Junior
+            <input type="radio" name="level2" />Professional
+          </td>
+          <td>
+            <input type="button" value="Show Logo" onclick="showBayer()" />
+          </td>
+        </tr>
+        <tr>
+          <td>3<sup>rd</sup></td>
+          <td>Real <sub>Madrid</sub></td>
+          <td>
+            <img src="madrid.png" alt="" width="60" height="60" />
+          </td>
+          <td>2z <sup>3</sup>+z<sup>2</sup>-2z+5=0</td>
+          <td>
+            <input type="radio" name="level3" />junior
+            <input type="radio" name="level3" />Professional
+          </td>
+          <td>
+            <input type="button" value="Show Logo" onclick="showMadrid()" />
+          </td>
+        </tr>
+      </table>
+    </div>
+    <script></script>
+    <h3>&copy Maulana 2019</h3>
+    <p>maulanatazmani@gmail.com</p>
+    <p id="showGambar"></p>
+  </body>
+</html>

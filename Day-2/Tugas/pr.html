@@ -1,0 +1,26 @@
+/* 1.input angka 2. input angka 2 pilih operator tampilkan result konfirmasi
+ulang atau tidak jika tidak ulang, tampilkan message selamat tinggal */
+
+<script>
+  do {
+    var angka1 = parseInt(prompt("masukan angka pertama"));
+    var angka2 = parseInt(prompt("masukan angka ke dua"));
+
+    var aritmatik = prompt("pilih salah satu : (+ , *, /, -)");
+    var hasil;
+
+    if (aritmatik == "+") {
+      hasil = angka1 + angka2;
+    } else if (aritmatik == "-") {
+      hasil = angka1 - angka2;
+    } else if (aritmatik == "*") {
+      hasil = angka1 * angka2;
+    } else if (aritmatik == "/") {
+      hasil = angka1 / angka2;
+    } else {
+      alert("masukan operator anyink!!");
+    }
+    alert("hasil perhitngan adalah : " + hasil);
+  } while (confirm("Hitung lagi?"));
+  alert("thanks for using");
+</script>
